@@ -17,6 +17,13 @@ The code is developed in the following hardware and OS setting:
 - Intel Core i7-13700KF CPU
 - 32 GB System Memory
 
+# Datasets
+- [Standford CheXpert](https://stanfordaimi.azurewebsites.net/datasets/8cbd9ed4-2eb9-4565-affc-111cf4f7ebe2)
+- [MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/)
+- [BRAX](https://physionet.org/content/brax/1.1.0/)
+- [NIH Chest X-ray14](https://www.kaggle.com/datasets/nih-chest-xrays/data)
+- [VinDr-CXR](https://physionet.org/content/vindr-cxr/1.0.0/)
+
 # Usage
 To train the model:
 ```
