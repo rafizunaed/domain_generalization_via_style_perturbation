@@ -106,8 +106,8 @@ def main():
     
     for fold_number in range(args.n_folds):
         set_random_state(args.seed)
-        if fold_number != 0:
-            continue
+        #if fold_number != 0:
+        #    continue
         print('Running fold-{} ....'.format(fold_number))
            
         all_targets = []
