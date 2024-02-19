@@ -34,7 +34,7 @@ from src.trainers.trainer_callbacks import set_random_state, AverageMeter, Print
 from src.datasets.data import ThoracicDataset, get_train_transforms, get_valid_transforms, ThoracicDatasetDual,\
     ThoracicDatasetTest, collate_fn_img_level_ds
 from src.models.densenet_ibn import DenseNet121_IBN
-from src.configs.training_configs import training_configs
+from src.configs.training_configs import all_configs, configs_to_train
 from src.utils.misc import remove_key_by_keyword_from_state_dict
 
 def get_args():
@@ -42,8 +42,7 @@ def get_args():
     get command line args
     """
     parser = ArgumentParser(description='train')
-    parser.add_argument('--run_configs_list', type=str, nargs="*", default=['srm_il_md_chexpert_mimic', 'srm_il_fl_S1_md_chexpert_mimic',\
-                                                                            'srm_il_fl_S2_md_chexpert_mimic', 'srm_il_fl_S2_cons_md_chexpert_mimic'])
+    parser.add_argument('--run_configs_list', type=str, nargs="*", default='prop_configs_list')
     parser.add_argument('--gpu_ids', type=str, default='0')
     parser.add_argument('--n_workers', type=int, default=24)
     parser.add_argument('--batch_size', type=int, default=50)
@@ -80,11 +79,13 @@ def main():
             args.gpu_ids.append(gpu_id)
 
     # check if there are duplicate weight saving paths
-    unique_paths = np.unique([ x[1]['weight_saving_path'] for x in training_configs.items() ])
-    assert len(training_configs.keys()) == len(unique_paths)
+    unique_paths = np.unique([ x[1]['weight_saving_path'] for x in all_configs.items() ])
+    assert len(all_configs.keys()) == len(unique_paths)
 
-    for config_name in args.run_configs_list:
-        configs = training_configs[config_name]
+    run_configs_list = configs_to_train['prop_configs_list']
+
+    for config_name in run_configs_list:
+        configs = all_configs[config_name]
         
         dataset_root_dir = configs['dataset_root_dir']
         split_info_dict_dir = configs['split_info_dict_dir']
@@ -92,7 +93,7 @@ def main():
         
         for fold_number in range(args.n_folds):
             set_random_state(args.seed)
-            # if fold_number != 0:
+            # if fold_number <= 0:
                 # continue
             print(f'Running fold-{fold_number} ....')
         
@@ -157,11 +158,6 @@ def main():
             else:
                 print('no checkpoint path is given!')
                     
-            # imgs = torch.zeros((2,3,224,224)).to("cuda")  
-            # model = DenseNet121_IBN(14, True, 'S1').to("cuda")
-            # out = model(imgs, True, False)
-            # print(out['logits'].shape)
-                
             if configs['method'] in ['srm_il']:
                 trainer_args = {
                         'model': model,

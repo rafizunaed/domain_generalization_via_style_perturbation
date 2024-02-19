@@ -22,12 +22,36 @@
 
 from src.configs.base_configs import CHEXPERT_MIMIC_DATASETS_ROOT_DIR, CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH
 
-training_configs = {
-    'srm_il_md_chexpert_mimic':{
-        'weight_saving_path': './weights/srm_il_md_chexpert_mimic/',
+configs_to_train = {
+    'prop_configs_list': ['init_pretrain_on_md_chexpert_mimic', 'srm_il_md_chexpert_mimic', 'srm_il_fl_S1_md_chexpert_mimic',\
+                     'srm_il_fl_S2_md_chexpert_mimic', 'srm_il_fl_S2_cons_md_chexpert_mimic']
+        }
+
+configs_to_test = {
+    'prop_model': 'srm_il_fl_S2_cons_md_chexpert_mimic',
+    }
+    
+all_configs = {
+    'init_pretrain_on_md_chexpert_mimic':{
+        'weight_saving_path': './weights/init_pretrain_on_md_chexpert_mimic/',
         'checkpoint_root_path': None,
         'method': 'srm_il',
         'epochs': 15, 
+        'use_srm_il': False,
+        'srm_il_min_value': 0,
+        'srm_il_max_value': 255,
+        'init_srm_fl': False,
+        'randomization_stage': None,
+        'eta': 0,
+        'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
+        'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        },
+    
+    'srm_il_md_chexpert_mimic':{
+        'weight_saving_path': './weights/srm_il_md_chexpert_mimic_w_load/',
+        'checkpoint_root_path': './weights/init_pretrain_on_md_chexpert_mimic/',
+        'method': 'srm_il',
+        'epochs': 5, 
         'use_srm_il': True,
         'srm_il_min_value': 0,
         'srm_il_max_value': 255,
@@ -42,7 +66,7 @@ training_configs = {
         'weight_saving_path': './weights/srm_il_fl_S1_md_chexpert_mimic/',
         'checkpoint_root_path': './weights/srm_il_md_chexpert_mimic/',
         'method': 'srm_il_fl',
-        'epochs': 15, 
+        'epochs': 5, 
         'use_srm_il': True,
         'srm_il_min_value': 0,
         'srm_il_max_value': 255,
@@ -57,7 +81,7 @@ training_configs = {
         'weight_saving_path': './weights/srm_il_fl_S2_md_chexpert_mimic/',
         'checkpoint_root_path': './weights/srm_il_fl_S1_md_chexpert_mimic/',
         'method': 'srm_il_fl',
-        'epochs': 15, 
+        'epochs': 5, 
         'use_srm_il': True,
         'srm_il_min_value': 0,
         'srm_il_max_value': 255,
@@ -87,7 +111,7 @@ training_configs = {
         'weight_saving_path': './weights/srm_il_cons_md_chexpert_mimic/',
         'checkpoint_root_path': './weights/srm_il_md_chexpert_mimic/',
         'method': 'srm_il_cons',
-        'epochs': 15, 
+        'epochs': 20, 
         'use_srm_il': True,
         'srm_il_min_value': 0,
         'srm_il_max_value': 255,

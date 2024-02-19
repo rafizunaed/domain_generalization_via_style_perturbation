@@ -36,18 +36,17 @@ from src.trainers.trainer_callbacks import set_random_state
 from src.models.densenet_ibn import DenseNet121_IBN
 from src.configs.base_configs import DEVICE, BRAX_DATASET_ROOT_DIR, NIH_CXR14_DATASET_ROOT_DIR, VinDr_CXR_DATASET_ROOT_DIR,\
     BRAX_TEST_INFO_DICT_PATH, NIH_CXR14_TEST_INFO_DICT_PATH, VinDr_CXR_TEST_INFO_DICT_PATH 
-from src.configs.training_configs import training_configs
+from src.configs.training_configs import all_configs, configs_to_test
 
 def get_args():
     parser = ArgumentParser(description='test')
-    parser.add_argument('--run_config', type=str, default='srm_il_fl_S2_cons_md_chexpert_mimic')
+    parser.add_argument('--run_config', type=str, default='prop_model')
     parser.add_argument('--gpu_ids', type=str, default='0')
     parser.add_argument('--n_workers', type=int, default=24)
     parser.add_argument('--batch_size', type=int, default=50)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--image_resize_dim', type=int, default=256)
     parser.add_argument('--image_crop_dim', type=int, default=224)
-    parser.add_argument('--add_extra_label', type=bool, default=True)
     parser.add_argument('--num_classes', type=int, default=14)
     parser.add_argument('--n_folds', type=int, default=5)
     parser.add_argument('--test_dataset', type=str, default='brax')
@@ -66,8 +65,8 @@ def main():
             args.gpu_ids.append(gpu_id)
             
     # get configs
-    run_config = args.run_config  
-    configs = training_configs[run_config]
+    run_config = configs_to_test[args.run_config] 
+    configs = all_configs[run_config]
     weight_saving_path = configs['weight_saving_path']
     
     # dataset specific info
@@ -106,8 +105,8 @@ def main():
     
     for fold_number in range(args.n_folds):
         set_random_state(args.seed)
-        #if fold_number != 0:
-        #    continue
+        # if fold_number != 0:
+            # continue
         print('Running fold-{} ....'.format(fold_number))
            
         all_targets = []

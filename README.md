@@ -27,11 +27,11 @@ The code is developed in the following hardware and OS setting:
 # Usage
 To train the model:
 ```
-python train.py --gpu_ids='0' --n_workers=24 --run_configs_list 'srm_il_md_chexpert_mimic' 'srm_il_fl_S1_md_chexpert_mimic' 'srm_il_fl_S2_md_chexpert_mimic' 'srm_il_fl_S2_cons_md_chexpert_mimic'
+python train.py --gpu_ids='0' --n_workers=24 --batch_size=50 --do_grad_accum=True --grad_accum_step=4 --image_resize_dim=256 --image_crop_dim=224 --run_configs_list 'prop_configs_list'
 ```
 To test the model:
 ```
-python test_ood.py --run_config='srm_il_fl_S2_cons_md_chexpert_mimic' --test_dataset='brax' --gpu_ids='0' --n_workers=24
+python test_ood.py --gpu_ids='0' --n_workers=24 --batch_size=50 --image_resize_dim=256 --image_crop_dim=224 --run_config 'prop_model' --test_dataset='brax'
 ```
 
 # Citation
