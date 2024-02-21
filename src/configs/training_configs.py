@@ -45,6 +45,7 @@ all_configs = {
         'eta': 0,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     
     'srm_il_md_chexpert_mimic':{
@@ -60,6 +61,7 @@ all_configs = {
         'eta': 0,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     
     'srm_il_fl_S1_md_chexpert_mimic':{
@@ -75,6 +77,7 @@ all_configs = {
         'eta': 0.01,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     
     'srm_il_fl_S2_md_chexpert_mimic':{
@@ -90,6 +93,7 @@ all_configs = {
         'eta': 0.01,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     
     'srm_il_fl_S2_cons_md_chexpert_mimic':{
@@ -105,6 +109,7 @@ all_configs = {
         'eta': 0.01,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     
     'srm_il_cons_md_chexpert_mimic':{
@@ -120,5 +125,6 @@ all_configs = {
         'eta': 0,
         'split_info_dict_dir': CHEXPERT_MIMIC_SPLIT_INFO_DICT_PATH,
         'dataset_root_dir': CHEXPERT_MIMIC_DATASETS_ROOT_DIR,
+        'backbone_architecture': 'densenet121_ibn',
         },
     }

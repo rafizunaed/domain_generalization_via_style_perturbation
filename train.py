@@ -33,7 +33,7 @@ from src.trainers.trainer_srm_il_cons import ModelTrainer_SRM_IL_CONS
 from src.trainers.trainer_callbacks import set_random_state, AverageMeter, PrintMeter
 from src.datasets.data import ThoracicDataset, get_train_transforms, get_valid_transforms, ThoracicDatasetDual,\
     ThoracicDatasetTest, collate_fn_img_level_ds
-from src.models.densenet_ibn import DenseNet121_IBN
+from src.models.build_model import create_model
 from src.configs.training_configs import all_configs, configs_to_train
 from src.utils.misc import remove_key_by_keyword_from_state_dict
 
@@ -145,14 +145,13 @@ def main():
                                 collate_fn=collate_fn_img_level_ds,
                                 )
     
-            model = DenseNet121_IBN(args.num_classes, init_srm_fl=configs['init_srm_fl'], randomization_stage=configs['randomization_stage'])
+            model = create_model(configs['backbone_architecture'], args.num_classes, init_srm_fl=configs['init_srm_fl'], randomization_stage=configs['randomization_stage'])
             if configs['checkpoint_root_path'] is not None:
                 print('loading checkpoint!')
                 wpath = configs['checkpoint_root_path']
                 checkpoint = torch.load(f'{wpath}/fold{fold_number}/checkpoint_best_auc_fold{fold_number}.pth')
                 print('fold {} loss score: {:.4f}'.format(fold_number, checkpoint['val_loss']))
                 print('fold {} auc score: {:.4f}'.format(fold_number, checkpoint['val_auc']))
-                # return checkpoint['Model_state_dict']
                 model.load_state_dict(remove_key_by_keyword_from_state_dict(checkpoint['Model_state_dict']), strict=False)
                 del checkpoint
             else:

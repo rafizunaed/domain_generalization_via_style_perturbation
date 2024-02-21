@@ -33,7 +33,7 @@ from sklearn.metrics import roc_auc_score
 
 from src.datasets.data import ThoracicDatasetTest, get_valid_transforms, collate_fn_img_level_ds
 from src.trainers.trainer_callbacks import set_random_state
-from src.models.densenet_ibn import DenseNet121_IBN
+from src.models.build_model import create_model
 from src.configs.base_configs import DEVICE, BRAX_DATASET_ROOT_DIR, NIH_CXR14_DATASET_ROOT_DIR, VinDr_CXR_DATASET_ROOT_DIR,\
     BRAX_TEST_INFO_DICT_PATH, NIH_CXR14_TEST_INFO_DICT_PATH, VinDr_CXR_TEST_INFO_DICT_PATH 
 from src.configs.training_configs import all_configs, configs_to_test
@@ -112,7 +112,7 @@ def main():
         all_targets = []
         all_probabilities = []
         
-        model = DenseNet121_IBN(args.num_classes, init_srm_fl=configs['init_srm_fl'], randomization_stage=configs['randomization_stage'])
+        model = create_model(configs['backbone_architecture'], args.num_classes, init_srm_fl=configs['init_srm_fl'], randomization_stage=configs['randomization_stage'])
         checkpoint = torch.load(weight_saving_path+f'/fold{fold_number}/checkpoint_best_auc_fold{fold_number}.pth')
         print('fold {} loss score: {:.4f}'.format(fold_number, checkpoint['val_loss']))
         print('fold {} auc score: {:.4f}'.format(fold_number, checkpoint['val_auc']))
