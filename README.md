@@ -1,4 +1,4 @@
-# Learning to Generalize towards Unseen Domains via a Content-Aware Style Invariant Framework for Disease Detection from Chest X-rays [[Paper](https://arxiv.org/abs/2302.13991)]
+# Learning to Generalize towards Unseen Domains via a Content-Aware Style Invariant Framework for Disease Detection from Chest X-rays [[IEEE J-BHI](https://ieeexplore.ieee.org/document/10460093)] [[arXiv](https://arxiv.org/abs/2302.13991)]
 
 ![](assets/overall_framework.png)
 
@@ -37,11 +37,15 @@ python test_ood.py --gpu_ids='0' --n_workers=24 --batch_size=50 --image_resize_d
 # Citation
 To cite this article in your publications, please use the following bibtex entry
 ```
-@article{zunaed2023learning,
-      title={Learning to Generalize towards Unseen Domains via a Content-Aware Style Invariant Framework for Disease Detection from Chest X-rays}, 
-      author={Zunaed, Mohammad and Haque, Md. Aynal and Hasan, Taufiq},
-      journal={arXiv:2302.13991},
-      year={2023},
+@ARTICLE{10460093,
+  author={Zunaed, Mohammad and Haque, Md. Aynal and Hasan, Taufiq},
+  journal={IEEE Journal of Biomedical and Health Informatics}, 
+  title={Learning to Generalize towards Unseen Domains via a Content-Aware Style Invariant Model for Disease Detection from Chest X-rays}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-11},
+  doi={10.1109/JBHI.2024.3372999}
 }
 ```
 
